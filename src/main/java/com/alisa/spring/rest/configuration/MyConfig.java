@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
+import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = "com.alisa.spring.rest")
@@ -36,10 +37,16 @@ public class MyConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.alisa.spring.rest.entity");
+        sessionFactory.setPackagesToScan("com.alisa.spring.rest.entity"); //пакет для сканирования
+
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty("hibernate.dialect"
+                , org.hibernate.dialect.MySQLDialect);
 
 
-        return sessionFactory;
+
+
+       // return sessionFactory;
     }
 
 }
